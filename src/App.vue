@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <template>
-      <span v-if="step < 7">
+      <span v-if="step < 5">
         <b>step{{step}}</b>
       </span>
 
@@ -57,8 +57,6 @@ export default {
     return {
       step: 1,
       questions: {
-        name: "",
-        title: 1,
         q1: 1,
         q2: 1,
         q3: 1,
@@ -72,36 +70,29 @@ export default {
   },
   mounted() {
     const params = parse(location.search.replace("?", ""));
-    const isValid = ["name", "title", "q1", "q2", "q3", "q4"].every(val => {
+    const isValid = ["q1", "q2", "q3", "q4"].every(val => {
       if (!params[val]) {
         return false;
       }
-      if (val != "name" && parseInt(params[val]) < 1) {
+      if (parseInt(params[val]) < 1) {
         return false;
       }
       return true;
     });
     if (isValid) {
       const questions = {
-        name: params.name,
-        title: parseInt(params.title),
         q1: parseInt(params.q1),
         q2: parseInt(params.q2),
         q3: parseInt(params.q3),
         q4: parseInt(params.q4)
       };
       this.questions = questions;
-      this.step = 7;
+      this.step = 5;
     }
   },
   methods: {
     handleNext() {
       this.step++;
-    },
-    handleStart(startData) {
-      this.questions.name = startData.name;
-      this.questions.title = startData.title;
-      this.handleNext();
     }
   },
   computed: {

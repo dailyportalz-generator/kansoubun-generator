@@ -53,6 +53,15 @@
         </tr>
       </tbody>
     </table>
+    <template v-if="step >= 5">
+      <p class="kanso-result_build">
+        <button type="button" @click="handleClickRestart">もう一度つくる</button>
+      </p>
+      <p class="kanso-result_share">
+        <input type="text" class="kanso-result_shareurl" readonly :value="shareUrl">
+        <a target="_blank" :href="twitterUrl">つぶやく</a>
+      </p>
+    </template>
   </div>
 </template>
 
@@ -87,6 +96,18 @@ export default {
           "よくわかんないんだけど、そう思った気がします。でも、どっちでもいいです。その日の晩ごはんはカレーでした。"
         ]
       ];
+    },
+    shareUrl() {
+      return `https://dailyportalz.jp/kiji/kansoubun-generator?${stringify(
+        {
+          ...this.questions
+        }
+      )}`
+    },
+    twitterUrl() {
+      return `https://twitter.com/intent/tweet?text=読書感想文メールジェネレーター&url=${encodeURIComponent(
+        this.shareUrl
+      )}`
     }
   },
   methods: {
