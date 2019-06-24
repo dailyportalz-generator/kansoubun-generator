@@ -1,5 +1,10 @@
 <template>
   <div class="kanso-result">
+    <template v-if="step > 4">
+      <p><strong>完成です。</strong></p>
+      <p>これで読書感想文ができました。なんか言ってるようでなにも言ってない文章。これを原稿用紙に書き写せば感想文のできあがり。さあ、残りの宿題にとりかかりましょう。</p>
+      <p>イッツ・コミュニケーションズ株式会社はこの感想文を実際に使用して起こるいかなる結果にも責任を持ちません。ご了解の上、ご利用ください。</p>
+    </template>
     <table width="530" border="0" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
@@ -105,7 +110,7 @@ export default {
       )}`
     },
     twitterUrl() {
-      return `https://twitter.com/intent/tweet?text=読書感想文メールジェネレーター&url=${encodeURIComponent(
+      return `https://twitter.com/intent/tweet?text=読書感想文メールジェネレーターで感想文を作りました&url=${encodeURIComponent(
         this.shareUrl
       )}`
     }
